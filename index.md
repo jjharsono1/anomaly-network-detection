@@ -82,8 +82,15 @@ An ARIMA model is one where the time series was differenced at least once to mak
 
 |Results on Original Scale| Results on Log Scaled|
 |-------------------------|----------------------|
-|![](train-og.png?raw=true)|![](train-log-scale.png?raw=true)|
+|![](train-og.png?raw=true)|![](train-log-scaled.png?raw=true)|
+|**Figure 2** ARIMA model anomaly detections using a 99% CI on the training set. The conditions generating the data: 40ms latency and 1/5000 packets dropped shifting to 320ms latency and 1/1250 packets being dropped. Time is measured in units of 20s since the ARIMA model trains on 20s aggregations of packets per second as a single data point. | **Figure 3** ARIMA model 99% CI predictions on training data with a log scale. The conditions generating the data: 40ms latency and 1/5000 packets dropped shifting to 320ms latency and 1/1250 packets being dropped. The ARIMA forecasts can be seen in orange.|
 
+<p>We then ran the model on our test set concatenated to our train data. We can see in figure 4 that there were 2 instances of false negatives where our model did not flag the configuration change as an anomaly. There was also a large spike in the middle of our steady state traffic which was flagged as anomalous, representing one case of a false positive. This window of traffic just so happened to have an extremely large volume of packets sent and was not due to a configuration change. </p>
+
+|Results on Original Scale| Results on Log Scaled|
+|-------------------------|----------------------|
+|![](test-og.png?raw=true)|![](test-log-scaled.png?raw=true)|
+|**Figure 4**  ARIMA model anomaly detections using a 99% CI on the test set. The conditions generating the data: 40ms latency and 1/5000 packets dropped shifting to 320ms latency and 1/1250 packets being dropped. Time is measured in units of 20s since the ARIMA model trains on 20s aggregations of packets per second as a single data point.| **Figure 5** ARIMA model anomaly detections using a 99% CI on the test set with a log scale and forecast predictions. |
 
 # Results
 ### Performance Measures

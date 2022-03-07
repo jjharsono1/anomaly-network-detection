@@ -94,8 +94,8 @@ An ARIMA model is one where the time series was differenced at least once to mak
     <td>Results on Log Scaled</td>
   </tr>    
   <tr>
-    <td> <img src="train-og.png"  alt="1" width = 360px height = 640px ></td>
-    <td><img src="train-log-scaled.png" alt="2" width = 360px height = 640px></td>
+    <td> <img src="train-og.png"  alt="1"></td>
+    <td><img src="train-log-scaled.png" alt="2"></td>
    </tr> 
    <tr>
       <td>**Figure 2** ARIMA model anomaly detections using a 99% CI on the training set. The conditions generating the data: 40ms latency and 1/5000 packets dropped shifting to 320ms latency and 1/1250 packets being dropped. Time is measured in units of 20s since the ARIMA model trains on 20s aggregations of packets per second as a single data point. </td>

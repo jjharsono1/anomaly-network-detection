@@ -63,10 +63,16 @@ We will be using data generated from DANE (Data Automation and Network Emulation
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Since we are dealing with time series data, we can create an anomaly detection model through the use of forecasting techniques. The basic concept is that we will pick a feature, in this case total packets sent per second (volume of traffic) and build a forecast. If the expected value is outside of our prediction interval (threshold) we will flag it as an anomaly. We are employing a multivariate time series forecast because we are using predictors other than the series (a.k.a exogenous variables).</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We will be focusing on building an ARIMA (Auto Regressive Integrated Moving Average) model. This model is actually a class of models that ‘explains’ a given time series based on its own past values, that is, its own lags and the lagged forecast errors, so that equation can be used to forecast future values.</p> 
 An ARIMA model can be characterized by 3 terms:
-- sdfdskfj
-- p: Order of the "AR" term which refers to the number of lags of Y to be used as predictors
-- q: Order of the "MA" term which refers to the number of lagged forecast errors that should go into the model
-- d: Number of differencing required to make the time series stationary
+- P: Order of the "AR" term which refers to the number of lags of Y to be used as predictors
+    - A pure Auto Regressive (AR only) model is one where Yt depends only on its own lags. That is, Yt is a function of the ‘lags of Yt’. 
+    ![](ar-formula.png?raw=true)
+- Q: Order of the "MA" term which refers to the number of lagged forecast errors that should go into the model
+    - Likewise a pure Moving Average (MA only) model is one where Yt depends only on the lagged forecast errors.
+    ![](ma-formula.png?raw=true)
+- D: Number of differencing required to make the time series stationary
+
+An ARIMA model is one where the time series was differenced at least once to make it stationary and you combine the AR and the MA terms. So the equation becomes:
+![](arima-formula.png?raw=true)
 # Results
 ### Performance Measures
 We chose to use **F1 score** as our metric but also considered **precision** in our metrics. Our motivation behind choosing F1 score and precision is because anomalous regions cause by network degradation are assumed to be rare. Since the intended use for this ensemble model is to alert ISP employees what connections are degraded if too many false positives are being flagged then there would not be much use in the alarm.

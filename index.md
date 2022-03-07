@@ -90,8 +90,8 @@ An ARIMA model is one where the time series was differenced at least once to mak
 
 <table>
   <tr>
-    <th>Results on Original Scale</td>
-    <th>Results on Log Scaled</td>
+    <th>Results on Original Scale</th>
+    <th>Results on Log Scaled</th>
   </tr>    
   <tr>
     <td> <img src="train-og.png"  alt="1"></td>

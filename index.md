@@ -5,8 +5,7 @@
     - [Prior Work](#prior-work)
     - [The Data](#the-data)
     - [Definition of an Anomaly](#definition-of-an-anomaly)
-    - [EDA](#eda)
-    - [Feature Engineering](#feature-engineering)
+    - [EDA & Feature Engineering](#eda-&-feature-engineering)
     - [Anomaly Detection Methods and Models](#exploration-of-anomaly-detection-methods)
 - [Results](#results)
     - [Performance Measures](#performance-measures)
@@ -111,4 +110,10 @@ We chose to use **F1 score** as our metric but also considered **precision** in 
 ### Bigger Questions
 ### Improvements
 # References
+- https://towardsdatascience.com/outlier-detection-with-isolation-forest-3d190448d45e
+- https://towardsdatascience.com/anomaly-detection-with-isolation-forest-visualization-23cd75c281e2
+- https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/
+- https://people.duke.edu/~rnau/411arim.htm
+- https://coolstatsblog.com/2013/08/14/using-aic-to-test-arima-models-2/
+
 # Appendix

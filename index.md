@@ -51,12 +51,13 @@ We will be using data generated from DANE (Data Automation and Network Emulation
     
 **Exploring Packets Per Second Feature**
 
-||First 180 Seconds| Last 120 Seconds|
+|First 180 Seconds| Last 120 Seconds|
 |-|----------------|-----------------|
 |Mean|1783.72|428.43|
 |Standard Deviation|710.10|260.22|
 |Max|4404|1548|
 |Min|680|152|
+
 ### Exploration of Anomaly Detection Methods
 **I.** Forecasting
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Since we are dealing with time series data, we can create an anomaly detection model through the use of forecasting techniques. The basic concept is that we will pick a feature, in this case total packets sent per second (volume of traffic) and build a forecast. If the expected value is outside of our prediction interval (threshold) we will flag it as an anomaly. We are employing a multivariate time series forecast because we are using predictors other than the series (a.k.a exogenous variables).</p>
@@ -75,6 +76,7 @@ We chose to use **F1 score** as our metric but also considered **precision** in 
 |F1 Score Formula| Precision Formula|
 | ---------------| -----------------|
 |![](f1-formula.png?raw=true)| ![](precision-formula.png?raw=true)|
+
 ### Performance
 
 ![](ensemble-performance.png?raw=true) 

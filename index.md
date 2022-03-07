@@ -24,6 +24,7 @@
 # Methodology
 ### The Data
 <p> We will be using data generated from DANE (Data Automation and Network Emulation Tool), a tool that automatically collects network traffic datasets in a parallelized manner without background noise, and emulates a diverse range of network conditions representative of the real world. Using DANE, we are able to configure parameters such as latency and the packet loss ratio ourselves. More importantly, we are able to simulate an anomaly by changing the configuration settings of the packet loss rate and latency mid run. The data collected is already aggregated per second with these fields:</p>
+
 | DANE Features | Description | 
 |--- | ----------- | 
 | Time | Broken down into seconds(epoch) | 

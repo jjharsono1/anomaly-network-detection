@@ -88,22 +88,6 @@ An ARIMA model is one where the time series was differenced at least once to mak
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To flag anomalous behavior, we calculated a 99% prediction interval around each forecast. If the actual value falls outside this interval, it is flagged as an anomaly. We tuned our prediction interval range from 95% - 99% and found that a 99% prediction interval was a wide enough range to limit the amount of false positives and capture extreme anomalous behavior. In addition, we also log transformed our data (mean of the total packets sent) to reduce the scale because the original data range was in the thousands and since our model considers forecast errors as part of the model, our prediction interval was much too wide. By transforming the data onto a smaller scale, we are better able to capture anomalies. </p>
 
-<table>
-  <tr>
-    <th>Results on Original Scale</th>
-    <th>Results on Log Scaled</th>
-  </tr>    
-  <tr>
-    <td> <img src="train-og.png"  alt="1" width=360px></td>
-    <td><img src="train-log-scaled.png" alt="2" width=360px></td>
-   </tr> 
-   <tr>
-      <td><b>Figure 2</b> ARIMA model anomaly detections using a 99% CI on the training set. The conditions generating the data: 40ms latency and 1/5000 packets dropped shifting to 320ms latency and 1/1250 packets being dropped. Time is measured in units of 20s since the ARIMA model trains on 20s aggregations of packets per second as a single data point. </td>
-      <td><b>Figure 3</b> ARIMA model 99% CI predictions on training data with a log scale. The conditions generating the data: 40ms latency and 1/5000 packets dropped shifting to 320ms latency and 1/1250 packets being dropped. The ARIMA forecasts can be seen in orange.
-  </td>
-  </tr>
-</table>
-
 
 |Results on Original Scale| Results on Log Scaled|
 |-------------------------|----------------------|

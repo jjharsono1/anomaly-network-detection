@@ -40,8 +40,6 @@ We will be using data generated from DANE (Data Automation and Network Emulation
 | Packet_dirs | Which endpoint was the source of each packet that arrived | 
 <br>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  We ran only two scenarios at once to prevent overloading our CPU by running too many DANE scenarios concurrently. Each DANE run is 5 minutes long.  The configuration change happens at the 180 second mark and what we configure for our packet loss rate determines the likelihood of each packet being dropped. This way, we are able to simulate an anomaly within our data and are able to simulate packet loss in a more realistic manner. Our steady state had a packet loss ratio of 1/5,000 and a latency of 40 ms. We are focused on identifying changes of a factor of 4 and above. In our case a packet loss ratio of 1/1,250  and a latency of 160 ms or greater or a packet loss ratio of 1/20,000 and latency of 10 ms. </p>
-
-<br>
 ### Definition of an Anomaly
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The type of behavior we are looking for is different from what a conventional anomaly would behave like. Typical anomalies are characterized by significantly large spikes or drops in a feature. The behavior we are looking for is more closely related to anomalous regions where the degradation in the network continues; these anomalies resemble shifts. As we will show in the next section, spikes in our features that would normally resemble anomalous behavior are perfectly random and not caused by any change in network quality. These anomalies would be considered false positives if detected.</p>
 ### EDA & Feature Engineering

@@ -73,6 +73,18 @@ An ARIMA model can be characterized by 3 terms:
 
 An ARIMA model is one where the time series was differenced at least once to make it stationary and you combine the AR and the MA terms. So the equation becomes:
 ![](arima-formula.png?raw=true)
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To hypertune these parameters of (p,d,q), we performed a grid search method and chose our model based on the AIC (Akaike Information Criteria). The AIC is a widely used measure of a statistical model. It basically quantifies 1) the goodness of fit, and 2) the simplicity/parsimony, of the model into a single statistic. When comparing two models, the one with the lower AIC is generally a “better-fit model”. </p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To simulate a live stream of data, we chose to implement window intervals of n seconds to train our ARIMA model on. We found that window intervals of 20 seconds worked best. Therefore, we aggregated our data into 20 second intervals with the mean of the total packet sent as our feature. Our training data consisted of eighteen 5 minute DANE runs for a total of approximately an hour and a half of network traffic. The first 30 minutes of data is our steady state with a latency of 40 ms and a packet loss ratio of 1/5000. Afterwards, we had 5 separate, spaced out instances of simulated anomalies with a return to a steady state in between each case. Each anomaly in our training data changed the latency to 160 ms and the packet loss ratio to 1/1250.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To flag anomalous behavior, we calculated a 99% prediction interval around each forecast. If the actual value falls outside this interval, it is flagged as an anomaly. We tuned our prediction interval range from 95% - 99% and found that a 99% prediction interval was a wide enough range to limit the amount of false positives and capture extreme anomalous behavior. In addition, we also log transformed our data (mean of the total packets sent) to reduce the scale because the original data range was in the thousands and since our model considers forecast errors as part of the model, our prediction interval was much too wide. By transforming the data onto a smaller scale, we are better able to capture anomalies. </p>
+
+|Results on Original Scale| Results on Log Scaled|
+|-------------------------|----------------------|
+|![](train-og.png?raw=true)|![](train-log-scale.png?raw=true)|
+
+
 # Results
 ### Performance Measures
 We chose to use **F1 score** as our metric but also considered **precision** in our metrics. Our motivation behind choosing F1 score and precision is because anomalous regions cause by network degradation are assumed to be rare. Since the intended use for this ensemble model is to alert ISP employees what connections are degraded if too many false positives are being flagged then there would not be much use in the alarm.

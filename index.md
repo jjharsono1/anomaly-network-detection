@@ -50,6 +50,7 @@ We will be using data generated from DANE (Data Automation and Network Emulation
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Comparing last quarter’s deterministic packet drops data with this quarter’s random packet drops data, we can see that the correlation between packets per second and packet loss is still there. Since packet loss and latency are our only ways of generating an anomaly, features such as packets per second and other features correlated with packet loss and latency will be our basis for determining whether there is an anomaly or not.</p>
     
 **Exploring Packets Per Second Feature**
+
 ||First 180 Seconds| Last 120 Seconds|
 |-|----------------|-----------------|
 |Mean|1783.72|428.43|
@@ -70,10 +71,12 @@ An ARIMA model can be characterized by 3 terms:
 We chose to use **F1 score** as our metric but also considered **precision** in our metrics. Our motivation behind choosing F1 score and precision is because anomalous regions cause by network degradation are assumed to be rare. Since the intended use for this ensemble model is to alert ISP employees what connections are degraded if too many false positives are being flagged then there would not be much use in the alarm.
 <br/><br/>
 <p> Our goal is to have the users trust that if there is an alarm they can be sure that there is network degradation, hence why precision is considered. We also do not want our model to always predict negative, making it trivial so F1 score was included. </p>
+
 |F1 Score Formula| Precision Formula|
 | ---------------| -----------------|
 |![](f1-formula.png?raw=true)| ![](precision-formula.png?raw=true)|
 ### Performance
+
 ![](ensemble-performance.png?raw=true) 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our method to combine our ARIMA and MAD model followed a simple logic. We ran both models independently and compared the results of each model. We used an AND operator to see where both models detected an anomaly and labeled it as an anomaly. Otherwise, if the condition is not met, then we do not label it as an anomaly. </p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Using the ensemble logic described above, our results show that we are able to detect anomalies early on when they occur. However, we have one false negative where no anomaly appears due to the fact that our ARIMA model detects the anomalies early on but the MAD model detects the anomalies later, so there is no overlap for our ensemble logic to agree on an anomaly. </p>
